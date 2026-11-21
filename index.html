@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ventora — Bring Your Invention to Life</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+
+<style>
+:root{--yellow:#f4c842;--cream:#faf9f6;--ink:#181818;color-scheme:light}*{box-sizing:border-box}body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--cream);color:var(--ink);line-height:1.5}.hidden{display:none!important}.brand-y{background:var(--yellow)}.text-y{color:#80600a}.navbar{position:static;background:#fff;border-bottom:1px solid #e9e6df}.card{border:1px solid #e9e6df;border-radius:18px;background:#fff;box-shadow:0 3px 12px rgba(20,20,20,.035)}.inp{border:1px solid #dcd8cf;border-radius:12px;padding:.72rem .85rem;width:100%;background:#fff;color:var(--ink)}.btn-y,.btn-dark,.btn-outline{font-weight:650;border-radius:999px;padding:.75rem 1.3rem;cursor:pointer;transition:none}.btn-y{background:var(--yellow);color:#171717}.btn-dark{background:#181818;color:white}.btn-outline{border:1.5px solid #181818;color:#181818}.prog-track{background:#eee9dc;border-radius:99px;height:8px;overflow:hidden}.prog-fill{background:#edbd27;height:100%;border-radius:99px}.sidebar a.active{background:var(--yellow);color:#181818}.ring-circ{width:36px;height:36px;border:2px solid #181818;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700}.hero-panel{position:relative;background:radial-gradient(circle at 84% 30%,rgba(244,200,66,.18),transparent 31%),linear-gradient(112deg,#fff9e8,#fffdf8 66%,#fff8df);border:1px solid #f2e8c6;border-radius:28px}.hero-panel:after{content:"";position:absolute;width:330px;height:330px;right:7%;top:-34%;border-radius:50%;border:1px solid rgba(202,158,26,.16);background:radial-gradient(circle,rgba(244,200,66,.09),transparent 70%);pointer-events:none}.campaign-story{background:#fff;border:1px solid #e8e3d8;border-radius:22px;padding:18px;box-shadow:0 8px 28px rgba(35,30,20,.045)}.eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#80600a}.navbar a,.card,.btn-y,.btn-dark,.btn-outline{transition:none!important}@media(max-width:767px){.navbar .max-w-7xl{justify-content:center}.navbar .md\\:flex{display:flex!important}.navbar button[aria-label="Menu"]{display:none}.sidebar{position:static}}
+.landing-entrance{animation:landingIn .7s cubic-bezier(.2,.75,.25,1) both}
+.landing-entrance-delay{animation:landingIn .85s cubic-bezier(.2,.75,.25,1) .12s both}
+#view-landing .reveal.landing-entrance-delay{animation:landingIn .85s cubic-bezier(.2,.75,.25,1) .12s both!important;opacity:0;transform:translateY(12px)}
+.landing-float-one{animation:productFloat 7s ease-in-out infinite}
+.landing-float-two{animation:productFloat 8s ease-in-out -2s infinite}
+.landing-float-three{animation:productFloat 9s ease-in-out -4s infinite}
+.view-enter{animation:viewEnter .34s cubic-bezier(.2,.72,.25,1) both}
+.campaign-card{animation:cardEnter .48s cubic-bezier(.2,.72,.25,1) both;animation-delay:var(--card-delay,0ms)}
+.hero-panel:before{content:"";position:absolute;width:190px;height:190px;right:28%;bottom:-30%;border-radius:50%;background:rgba(244,200,66,.12);filter:blur(2px);animation:ambientDrift 10s ease-in-out infinite alternate;pointer-events:none}
+@keyframes landingIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes productFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes viewEnter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cardEnter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ambientDrift{from{transform:translate(0,0) scale(.96)}to{transform:translate(-18px,-10px) scale(1.06)}}
+@media(prefers-reduced-motion:reduce){.landing-entrance,.landing-entrance-delay,.landing-float-one,.landing-float-two,.landing-float-three,.view-enter,.campaign-card,#view-landing .reveal.landing-entrance-delay,.hero-panel:before{animation:none!important;opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="w-full flex items-center justify-between gap-3 px-6 py-3 flex-wrap">
+    <div class="flex items-center gap-2 cursor-pointer" onclick="showView('landing')">
+      <svg viewBox="0 0 24 24" width="26" height="26"><path d="M3 4l9 16 9-16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 11v9" stroke="#F2B33D" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <span class="text-xl font-extrabold tracking-tight">Ventora</span>
+    </div>
+    <div class="flex items-center gap-5 text-sm font-medium flex-wrap">
+      <a onclick="showView('landing')" class="cursor-pointer ">Home</a>
+      <a onclick="showView('explore');renderExplore()" class="cursor-pointer ">Explore</a>
+      <a onclick="showView('how')" class="cursor-pointer ">How It Works</a>
+      <a onclick="showView('about')" class="cursor-pointer ">About</a>
+      
+      <button id="roleButton" onclick="showView('access')" class="btn-outline text-sm">LOGIN</button>
+    </div>
+    
+  </div>
+</nav>
+
+
+
+<main class="w-full max-w-none mx-auto px-6 lg:px-10">
+
+<!-- ROLE SELECTOR -->
+<section id="view-access" class="hidden py-12">
+  <div class="max-w-5xl mx-auto">
+    <button class="text-sm text-neutral-500 mb-5" onclick="showView('landing')">← Back</button>
+    <p class="eyebrow mb-3" style="font-size:1rem;letter-spacing:.12em">Prototype role selector</p>
+    <h1 class="text-4xl md:text-5xl font-bold mb-7">Choose a role to preview</h1>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <button class="card p-6 text-left" onclick="selectRole('customer')"><svg width="38" height="38" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M7 14h26l-2 20H9L7 14Z" stroke="#171717" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 15V11a6 6 0 0 1 12 0v4" stroke="#171717" stroke-width="2.5" stroke-linecap="round"/><path d="M14 25h12" stroke="#E5B824" stroke-width="3" stroke-linecap="round"/></svg><span class="block text-2xl font-bold mt-4 mb-2">Customer</span><span class="text-sm text-neutral-600">Find a clever new favourite and help it get made.</span></button>
+      <button class="card p-6 text-left" onclick="selectRole('inventor')"><svg width="38" height="38" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M14 27c-1-3-5-5-5-11a11 11 0 1 1 22 0c0 6-4 8-5 11H14Z" stroke="#171717" stroke-width="2.5" stroke-linejoin="round"/><path d="M15 32h10M17 36h6M20 4v4M4 16h4M32 16h4" stroke="#E5B824" stroke-width="2.5" stroke-linecap="round"/></svg><span class="block text-2xl font-bold mt-4 mb-2">Inventor</span><span class="text-sm text-neutral-600">Give that big idea its very first launch.</span></button>
+      <button class="card p-6 text-left" onclick="selectRole('manufacturer')"><svg width="38" height="38" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M6 34V17l11 6v-6l11 6V9h6v25H6Z" stroke="#171717" stroke-width="2.5" stroke-linejoin="round"/><path d="M11 29h3M21 29h3M29 29h2M28 9V5h6v4" stroke="#E5B824" stroke-width="2.5" stroke-linecap="round"/></svg><span class="block text-2xl font-bold mt-4 mb-2">Manufacturer</span><span class="text-sm text-neutral-600">Put your workshop know-how behind fresh ideas.</span></button>
+      <button class="card p-6 text-left" onclick="selectRole('influencer')"><svg width="38" height="38" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="m6 18 25-10v24L6 22v-4Z" stroke="#171717" stroke-width="2.5" stroke-linejoin="round"/><path d="m13 24 4 10h6l-5-7M35 15v10" stroke="#E5B824" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="block text-2xl font-bold mt-4 mb-2">Influencer</span><span class="text-sm text-neutral-600">Help your community discover tomorrow’s favourites.</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- LANDING -->
+<section id="view-landing">
+  <div class="hero-panel landing-entrance relative grid md:grid-cols-2 gap-10 items-center p-8 md:p-14 my-10 overflow-hidden">
+    <div class="relative">
+      <h1 class="au au1 text-4xl md:text-5xl font-extrabold leading-tight mb-4">Bring your invention to life.</h1>
+      <p class="au au2 text-neutral-600 text-lg mb-7">Find early supporters and manufacturing partners for your idea.</p>
+      <div class="au au3 flex gap-3 flex-wrap">
+        <button class="btn-y" onclick="showView('explore');renderExplore()">Explore Campaigns</button>
+        <button class="btn-outline" onclick="setRole('inventor');enterDash()">Launch Your Idea</button>
+      </div>
+    </div>
+    <div class="relative h-80 hidden md:block">
+      <div class="au au2 float landing-float-one absolute top-2 left-4 card p-4 w-44 shadow-sm">
+        <div class="w-9 h-9 brand-y rounded-lg flex items-center justify-center mb-2"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#111" stroke-width="1.6"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></div>
+        <p class="text-sm font-semibold">Desk Organiser</p><p class="text-xs text-neutral-500">Lifestyle</p>
+      </div>
+      <div class="au au3 float landing-float-two absolute top-32 right-2 card p-4 w-44 shadow-sm" style="animation-delay:.7s">
+        <div class="w-9 h-9 brand-y rounded-lg flex items-center justify-center mb-2"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#111" stroke-width="1.6"><path d="M5 21c0-9 5-16 14-17-1 10-8 15-17 17z"/><path d="M5 21c3-5 7-9 12-12"/></svg></div>
+        <p class="text-sm font-semibold">Plant Monitor</p><p class="text-xs text-neutral-500">Electronics</p>
+      </div>
+      <div class="au au4 float landing-float-three absolute bottom-0 left-24 card p-4 w-44 shadow-sm" style="animation-delay:1.3s">
+        <div class="w-9 h-9 brand-y rounded-lg flex items-center justify-center mb-2"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#111" stroke-width="1.6"><rect x="4" y="5" width="16" height="10" rx="1"/><path d="M2 19h20l-2-3H4l-2 3z"/></svg></div>
+        <p class="text-sm font-semibold">Laptop Stand</p><p class="text-xs text-neutral-500">Accessories</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal landing-entrance-delay py-10 border-t">
+    <div class="flex items-center justify-between mb-6"><h2 class="text-2xl font-bold">Live Campaigns</h2><a class="text-sm font-semibold cursor-pointer " onclick="showView('explore');renderExplore()">View all →</a></div>
+    <div id="landingGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </div>
+
+</section>
+
+<!-- EXPLORE -->
+<section id="view-explore" class="hidden py-10">
+  <h1 class="text-3xl font-bold mb-6">Explore Campaigns</h1>
+  <div class="flex gap-4 mb-6 flex-wrap items-end">
+    <div><label class="text-xs font-medium text-neutral-500 block mb-1">Category</label><select id="fCat" class="inp !w-auto" onchange="renderExplore()"><option value="">All categories</option><option>Lifestyle</option><option>Electronics</option><option>Accessories</option></select></div>
+    <div><label class="text-xs font-medium text-neutral-500 block mb-1">Status</label><select id="fStatus" class="inp !w-auto" onchange="renderExplore()"><option value="">All statuses</option><option>Active</option><option>Funded</option><option>Closed</option></select></div>
+  </div>
+  <div id="exploreGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+</section>
+
+<!-- CAMPAIGN DETAIL -->
+<section id="view-campaign" class="hidden py-10"></section>
+
+<!-- HOW -->
+<section id="view-how" class="hidden py-14 max-w-3xl">
+  <h1 class="text-3xl font-bold mb-6">How Ventora Works</h1>
+  <ol class="space-y-4 text-neutral-600">
+    <li><b class="text-black">1. Publish.</b> An inventor lists a product with price, funding target and manufacturing requirements.</li>
+    <li><b class="text-black">2. Validate.</b> Customers support the idea financially or lock in a pre-order.</li>
+    <li><b class="text-black">3. Connect.</b> Manufacturers browse demand and submit indicative quotes.</li>
+    <li><b class="text-black">4. Amplify.</b> Influencers opt in to promote campaigns for a fee or commission.</li>
+    <li><b class="text-black">5. Produce.</b> Once funded, the inventor proceeds to production with a matched manufacturer.</li>
+  </ol>
+</section>
+
+<!-- ABOUT -->
+<section id="view-about" class="hidden py-14 max-w-3xl">
+  <h1 class="text-3xl font-bold mb-6">About Ventora</h1>
+  <p class="text-neutral-600 mb-4">Most factories in India won't run a production batch below a few thousand units — out of reach for a first-time inventor with one good idea and no capital. Ventora closes that gap: prove the demand first, then make the product.</p>
+  <p class="text-neutral-600">Publish your idea, let customers back it, and bring manufacturers to the table once the numbers speak for themselves.</p>
+</section>
+
+<!-- DASHBOARD -->
+<section id="view-dashboard" class="hidden py-8">
+  <div class="grid md:grid-cols-[200px_1fr] gap-6">
+    <aside class="sidebar card p-3 h-fit">
+      <p class="text-xs font-semibold text-neutral-400 px-2 mb-2" id="sideRoleLabel"></p>
+      <div id="sideLinks" class="flex md:flex-col gap-1 flex-wrap"></div>
+    </aside>
+    <div id="dashContent"></div>
+  </div>
+</section>
+
+
+
+</main>
+
+<footer class="border-t mt-10 py-6 text-center text-sm text-neutral-400">© Ventora</footer>
+
+<script>
+/* ---------- DATA ---------- */
+const ICONS = {
+  box:'<svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg>',
+  leaf:'<svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6"><path d="M5 21c0-9 5-16 14-17-1 10-8 15-17 17z"/><path d="M5 21c3-5 7-9 12-12"/></svg>',
+  laptop:'<svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6"><rect x="4" y="5" width="16" height="10" rx="1"/><path d="M2 19h20l-2-3H4l-2 3z"/></svg>'
+};
+function seed(){
+  const now=Date.now(), day=86400000;
+  return [
+    {id:'c1',name:'Modular Desk Organiser',category:'Lifestyle',description:'A stackable, reconfigurable desk organiser made from recycled ABS — snap modules together to fit any desk layout.',icon:'box',imageData:null,price:699,target:100000,contributionsRaised:40000,preorderRaised:25000,contributorsCount:38,preorderCount:29,preorderQty:29,deadline:now+20*day,deliveryDate:now+70*day,creator:'Ananya Rao',manufacturingReq:'Injection-moulded ABS, 4 interlocking parts, matte finish.',productionQty:2000,quotations:[],mfgActivity:[],influencerActivity:[],createdAt:now-5*day},
+    {id:'c2',name:'Smart Plant Monitoring Device',category:'Electronics',description:'A soil-probe sensor that tracks moisture, light and temperature and syncs to a companion app so your plants never die of neglect again.',icon:'leaf',imageData:null,price:1499,target:150000,contributionsRaised:60000,preorderRaised:30000,contributorsCount:52,preorderCount:20,preorderQty:20,deadline:now+25*day,deliveryDate:now+90*day,creator:'Rohan Mehta',manufacturingReq:'PCB assembly, IP54 enclosure, BLE module, soil probe.',productionQty:1500,quotations:[],mfgActivity:[],influencerActivity:[],createdAt:now-10*day},
+    {id:'c3',name:'Portable Foldable Laptop Stand',category:'Accessories',description:'An aircraft-aluminium laptop stand that folds flat to 12mm and fits in a laptop sleeve pocket — ergonomic height in two seconds.',icon:'laptop',imageData:null,price:899,target:75000,contributionsRaised:18000,preorderRaised:12000,contributorsCount:21,preorderCount:14,preorderQty:14,deadline:now+15*day,deliveryDate:now+60*day,creator:'Priya Nair',manufacturingReq:'CNC-cut aluminium, silicone grip pads, hinge assembly.',productionQty:3000,quotations:[],mfgActivity:[],influencerActivity:[],createdAt:now-2*day}
+  ];
+}
+function load(){let d=localStorage.getItem('ventoraData');if(!d){const initial={campaigns:seed()};localStorage.setItem('ventoraData',JSON.stringify(initial));return initial;}try{return JSON.parse(d)}catch{return {campaigns:seed()}}}
+function save(d){localStorage.setItem('ventoraData',JSON.stringify(d));}
+let DATA=load();
+function raised(c){return c.contributionsRaised+c.preorderRaised;}
+function status(c){if(raised(c)>=c.target)return'Funded';if(Date.now()>c.deadline)return'Closed';return'Active';}
+function fmt(n){return '₹'+Math.round(n).toLocaleString('en-IN');}
+function safeText(v){return String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function displayText(v){return safeText(String(v??'').replace(/&amp;|&lt;|&gt;|&quot;|&#39;/g,e=>({'&amp;':'&','&lt;':'<','&gt;':'>','&quot;':'"','&#39;':"'"}[e])));}
+function days(ts){return Math.max(0,Math.ceil((ts-Date.now())/86400000));}
+function uid(){return 'c'+Date.now()+Math.floor(Math.random()*1000);}
+function find(id){return DATA.campaigns.find(c=>c.id===id);}
+
+/* ---------- VIEW SWITCH ---------- */
+let currentRole='customer', currentCampaignId=null;
+function showView(name){
+  const views=['landing','access','explore','campaign','how','about','dashboard'];
+  views.forEach(v=>{const el=document.getElementById('view-'+v);el.classList.toggle('hidden',v!==name);el.classList.remove('view-enter')});
+  const active=document.getElementById('view-'+name);if(active){void active.offsetWidth;active.classList.add('view-enter')}
+  window.scrollTo(0,0);
+}
+function setRole(r){currentRole=r;document.getElementById('roleButton').textContent='LOGIN';dashTab=null;}
+function selectRole(r){setRole(r);enterDash();}
+function enterDash(){
+  if(currentRole==='customer'){showView('explore');renderExplore();return;}
+  showView('dashboard');renderDashboard();
+}
+
+/* ---------- EXPLORE / LANDING GRID ---------- */
+function campaignImg(c,big){
+  const cls=big?'w-full h-64 object-cover':'w-full h-40 object-cover';
+  if(c.imageData) return `<img src="${c.imageData}" class="${cls} rounded-t-[13px]">`;
+  return `<div class="${cls} rounded-t-[13px] brand-y flex items-center justify-center"><div class="w-16 h-16">${ICONS[c.icon]||ICONS.box}</div></div>`;
+}
+function cardHTML(c,index=0){
+  const st=status(c), pct=Math.min(100,Math.round(raised(c)/c.target*100));
+  const stColor= st==='Funded'?'bg-green-100 text-green-700':st==='Closed'?'bg-neutral-200 text-neutral-600':'bg-[#FFF4CC] text-y';
+  return `<div class="card campaign-card overflow-hidden cursor-pointer " style="--card-delay:${Math.min(index,5)*65}ms" onclick="openCampaign('${c.id}')">
+    ${campaignImg(c,false)}
+    <div class="p-4">
+      <div class="flex justify-between items-start gap-2 mb-1"><p class="font-bold">${c.name}</p><span class="text-[11px] font-semibold px-2 py-0.5 rounded-full ${stColor}">${st}</span></div>
+      <p class="text-xs text-neutral-500 mb-2">by ${c.creator} · ${c.category}</p>
+      <p class="text-sm text-neutral-600 line-clamp-2 mb-3">${c.description}</p>
+      <div class="prog-track mb-1"><div class="prog-fill" style="width:${pct}%"></div></div>
+      <div class="flex justify-between text-xs text-neutral-500 mb-2"><span>${fmt(raised(c))} of ${fmt(c.target)}</span><span>${pct}%</span></div>
+      <div class="flex justify-between text-sm font-semibold"><span>${c.contributorsCount+c.preorderCount} supporters</span><span>Pre-order ${fmt(c.price)}</span></div>
+    </div></div>`;
+}
+function renderExplore(){
+  const cat=document.getElementById('fCat')?.value, st=document.getElementById('fStatus')?.value;
+  const list=DATA.campaigns.filter(c=>(!cat||c.category===cat)&&(!st||status(c)===st));
+  document.getElementById('exploreGrid').innerHTML= list.length? list.map(cardHTML).join('') : '<p class="text-neutral-500">No campaigns match these filters.</p>';
+}
+function renderLandingGrid(){
+  document.getElementById('landingGrid').innerHTML = DATA.campaigns.slice(0,6).map(cardHTML).join('');
+}
+
+/* ---------- CAMPAIGN DETAIL ---------- */
+function openCampaign(id){currentCampaignId=id;showView('campaign');renderCampaignDetail();}
+function renderCampaignDetail(){
+  const c=find(currentCampaignId); if(!c)return;
+  const st=status(c), pct=Math.min(100,Math.round(raised(c)/c.target*100));
+  const active= st==='Active';
+  document.getElementById('view-campaign').innerHTML = `
+  <button class="text-sm text-neutral-500 mb-4" onclick="showView('explore')">&larr; Back to Explore</button>
+  <div class="grid md:grid-cols-[1.1fr_.9fr] gap-8">
+    <div class="campaign-story">
+      <div class="card overflow-hidden mb-5">${campaignImg(c,true)}</div>
+      <h1 class="text-2xl font-bold mb-1">${c.name}</h1>
+      <p class="text-sm text-neutral-500 mb-4">by ${c.creator} · ${c.category} · <span class="font-semibold">${st}</span></p>
+      <p class="text-neutral-600 mb-4">${c.description}</p>
+      <p class="text-sm text-neutral-500">Manufacturing requirement: ${c.manufacturingReq}</p>
+      <p class="text-sm text-neutral-500">Estimated delivery: ${new Date(c.deliveryDate).toLocaleDateString('en-IN')}</p>
+    </div>
+    <div>
+      <div class="card p-5 mb-5">
+        <div class="prog-track mb-2"><div class="prog-fill" style="width:${pct}%"></div></div>
+        <p class="font-bold text-lg mb-1">${fmt(raised(c))} <span class="text-sm font-normal text-neutral-500">raised of ${fmt(c.target)}</span></p>
+        <div class="grid grid-cols-2 gap-2 text-sm text-neutral-500 mb-1">
+          <p>${c.contributorsCount} backers</p><p>${c.preorderCount} pre-orders</p>
+          <p>${days(c.deadline)} days left</p><p>Pre-order ₹${c.price}</p>
+        </div>
+      </div>
+      ${active?`
+      <div class="card p-5 mb-4">
+        <p class="font-bold mb-2">Support this Idea</p>
+        <label class="text-xs font-medium text-neutral-500 block mb-1">Amount (₹)</label>
+        <input id="supAmt" type="number" min="1" class="inp mb-2">
+        <button class="btn-y w-full" onclick="doSupport()">Contribute</button>
+        <p id="supMsg" class="text-sm mt-2"></p>
+      </div>
+      <div class="card p-5">
+        <p class="font-bold mb-2">Pre-order this Product</p>
+        <div class="flex items-center gap-3 mb-2"><label class="text-sm">Qty</label><input id="preQty" type="number" value="1" min="1" class="inp !w-24" oninput="updatePreTotal()"></div>
+        <p class="text-sm text-neutral-500 mb-2">Total: <span id="preTotal" class="font-semibold text-black">${fmt(c.price)}</span></p>
+        <label class="text-xs font-medium text-neutral-500 block mb-1">Your name</label>
+        <input id="preName" class="inp mb-2">
+        <label class="text-xs font-medium text-neutral-500 block mb-1">Email</label>
+        <input id="preEmail" class="inp mb-2">
+        <button class="btn-dark w-full" onclick="doPreorder()">Place Pre-order</button>
+        <p id="preMsg" class="text-sm mt-2"></p>
+      </div>`:`<div class="card p-5 text-sm text-neutral-500">This campaign is ${st.toLowerCase()} and is no longer accepting contributions or pre-orders.</div>`}
+    </div>
+  </div>`;
+}
+function updatePreTotal(){const c=find(currentCampaignId);const q=Math.max(1,parseInt(document.getElementById('preQty').value)||1);document.getElementById('preTotal').textContent=fmt(c.price*q);}
+function doSupport(){
+  const c=find(currentCampaignId); const amt=parseFloat(document.getElementById('supAmt').value);
+  if(!amt||amt<=0){document.getElementById('supMsg').innerHTML='<span class="text-red-600">Enter a valid amount.</span>';return;}
+  c.contributionsRaised+=amt;c.contributorsCount+=1;save(DATA);
+  renderCampaignDetail(); renderExplore(); renderLandingGrid();
+  document.getElementById('view-campaign').insertAdjacentHTML('afterbegin',`<p class="card p-3 mb-4 text-green-700">Thank you! Your simulated support of ${fmt(amt)} has been recorded.</p>`);
+}
+function doPreorder(){
+  const c=find(currentCampaignId); const q=Math.max(1,parseInt(document.getElementById('preQty').value)||1);
+  const name=document.getElementById('preName').value.trim(), email=document.getElementById('preEmail').value.trim();
+  if(!name||!email){document.getElementById('preMsg').innerHTML='<span class="text-red-600">Enter your name and email to continue.</span>';return;}
+  const total=c.price*q; c.preorderRaised+=total;c.preorderCount+=1;c.preorderQty+=q; save(DATA);
+  renderCampaignDetail(); renderExplore(); renderLandingGrid();
+  document.getElementById('view-campaign').insertAdjacentHTML('afterbegin',`<p class="card p-3 mb-4 text-green-700">Pre-order recorded: ${q} × ${safeText(c.name)} · ${fmt(total)} simulated.</p>`);
+}
+
+/* ---------- DASHBOARD ---------- */
+const SIDE={
+  inventor:[['overview','Overview'],['create','Create Campaign'],['campaigns','My Campaigns']],
+  manufacturer:[['browse','Opportunities']],
+  influencer:[['browse','Campaigns']]
+};
+let dashTab=null, expandedCampaignId=null;
+function renderDashboard(){
+  const sidebar=document.querySelector('#view-dashboard .sidebar');
+  const layout=document.querySelector('#view-dashboard > div');
+  const compact=['manufacturer','influencer'].includes(currentRole);
+  sidebar.classList.toggle('hidden',compact);
+  layout.classList.toggle('md:grid-cols-[200px_1fr]',!compact);
+  layout.classList.toggle('block',compact);
+  document.getElementById('sideRoleLabel').textContent=currentRole.toUpperCase()+' DASHBOARD';
+  const tabs=SIDE[currentRole]||[]; if(!dashTab||!tabs.find(t=>t[0]===dashTab))dashTab=tabs[0]?.[0];
+  document.getElementById('sideLinks').innerHTML=tabs.map(t=>`<a class="px-3 py-2 rounded-lg text-sm cursor-pointer ${t[0]===dashTab?'active font-semibold':''}" onclick="dashTab='${t[0]}';renderDashboard()">${t[1]}</a>`).join('')+ (currentRole==='inventor'?``:'');
+  const el=document.getElementById('dashContent');
+  if(currentRole==='inventor') el.innerHTML = dashTab==='overview'?inventorOverview(): dashTab==='create'?createForm(): inventorCampaigns();
+  if(currentRole==='manufacturer') el.innerHTML = manufacturerView();
+  if(currentRole==='influencer') el.innerHTML = influencerView();
+}
+function stat(label,val){return `<div class="card p-4"><p class="text-xs text-neutral-500 mb-1">${label}</p><p class="text-xl font-bold">${val}</p></div>`;}
+function inventorOverview(){
+  const cs=DATA.campaigns;
+  const totalRaised=cs.reduce((s,c)=>s+raised(c),0), totalContrib=cs.reduce((s,c)=>s+c.contributionsRaised,0), totalPre=cs.reduce((s,c)=>s+c.preorderCount,0), active=cs.filter(c=>status(c)==='Active').length;
+  return `<h2 class="text-2xl font-bold mb-5">Overview</h2>
+  <div class="grid sm:grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+  ${stat('Total Campaigns',cs.length)}${stat('Funds Raised',fmt(totalRaised))}${stat('Crowdfunding',fmt(totalContrib))}${stat('Pre-orders',totalPre+' orders')}${stat('Active Campaigns',active)}
+  </div>
+  <div class="grid gap-3">${cs.map(c=>campaignStatRow(c)).join('')}</div>`;
+}
+function campaignStatRow(c){
+  const pct=Math.min(100,Math.round(raised(c)/c.target*100));
+  const open=expandedCampaignId===c.id;
+  return `<div class="card p-4 mb-3">
+    <button class="w-full flex items-center gap-4 flex-wrap text-left" aria-expanded="${open}" onclick="toggleCampaignDetails('${c.id}')">
+    <span class="flex-1 min-w-[180px]"><span class="block font-semibold">${c.name}</span><span class="text-xs text-neutral-500">${status(c)} · ${pct}% funded</span></span>
+    <p class="text-sm">${fmt(c.contributionsRaised)} <span class="text-neutral-400">crowdfund</span></p>
+    <p class="text-sm">${fmt(c.preorderRaised)} <span class="text-neutral-400">pre-order (${c.preorderQty})</span></p>
+    <p class="text-sm">${c.mfgActivity?.length||0} manufacturer activity</p>
+    <p class="text-sm">${c.influencerActivity?.length||0} influencer interest</p>
+    <span class="text-sm font-semibold text-y">${open?'Hide details −':'View details +'}</span></button>
+    ${open?campaignFullDetails(c):''}</div>`;
+}
+function toggleCampaignDetails(id){expandedCampaignId=expandedCampaignId===id?null:id;renderDashboard();}
+function campaignFullDetails(c){
+  const quotes=(c.mfgActivity||[]).map(m=>`<div class="rounded-xl bg-white border p-4 mb-2"><p class="font-semibold">${displayText(m.company||m.name||'Manufacturer')} <span class="font-normal text-neutral-500">${displayText(m.username||'')}</span></p><p class="text-sm text-neutral-600">${displayText(m.email||'Contact not provided')} · ${displayText(m.location||'Location not provided')}</p><p class="text-sm mt-2">${m.type==='quote'?`Quote: ${displayText(m.qty)} units · ${fmt(Number(m.unit)||0)}/unit · Setup ${fmt(Number(m.setup)||0)} · ${displayText(m.time)}`:'Expressed interest'}</p><p class="text-sm text-neutral-500">${displayText(m.specialty||m.remarks||'')}</p></div>`).join('')||'<p class="text-sm text-neutral-500">No manufacturer responses yet.</p>';
+  const promoters=(c.influencerActivity||[]).map(i=>`<div class="rounded-xl bg-white border p-4 mb-2"><p class="font-semibold">${displayText(i.name||i.username||'Influencer')} <span class="font-normal text-neutral-500">${displayText(i.username||'')}</span></p><p class="text-sm text-neutral-600">${displayText(i.platform||'')} ${displayText(i.handle||'')} · ${displayText(i.followers||'Audience not provided')} followers</p><p class="text-sm text-neutral-500">${displayText(i.email||'Contact not provided')}</p></div>`).join('')||'<p class="text-sm text-neutral-500">No influencer responses yet.</p>';
+  return `<div class="border-t mt-4 pt-4"><div class="grid lg:grid-cols-3 gap-4"><div class="rounded-xl bg-neutral-50 p-4"><p class="font-bold mb-2">Campaign details</p><p class="text-sm">${displayText(c.description)}</p><p class="text-sm mt-3"><b>Price:</b> ${fmt(c.price)} · <b>Target:</b> ${fmt(c.target)}</p><p class="text-sm mt-1"><b>Requirement:</b> ${displayText(c.manufacturingReq)}</p><p class="text-sm mt-1"><b>Delivery estimate:</b> ${new Date(c.deliveryDate).toLocaleDateString('en-IN')}</p></div><div><p class="font-bold mb-2">Manufacturers</p>${quotes}</div><div><p class="font-bold mb-2">Influencers</p>${promoters}</div></div></div>`;
+}
+function inventorCampaigns(){
+  return `<h2 class="text-2xl font-bold mb-5">My Campaigns</h2><div class="space-y-5">${DATA.campaigns.map(c=>`
+  <div class="card p-5">
+    <div class="flex justify-between flex-wrap gap-2 mb-2"><p class="font-bold">${c.name}</p><span class="text-xs font-semibold">${status(c)}</span></div>
+    <div class="prog-track mb-3"><div class="prog-fill" style="width:${Math.min(100,Math.round(raised(c)/c.target*100))}%"></div></div>
+    <p class="text-sm font-semibold mb-1">Manufacturer activity</p>
+    ${c.mfgActivity?.length? `<div class="text-sm text-neutral-500 mb-2">${c.mfgActivity.map(m=>m.type==='quote'?`${m.name}: qty ${m.qty}, ₹${m.unit}/unit, setup ₹${m.setup}, ${m.time}`:`${m.name} expressed interest`).join('<br>')}</div>`:'<p class="text-sm text-neutral-400 mb-2">None yet.</p>'}
+    <p class="text-sm font-semibold mb-1">Influencer activity</p>
+    ${c.influencerActivity?.length? `<div class="text-sm text-neutral-500">${c.influencerActivity.map(i=>i.name+' wants to promote this campaign').join('<br>')}</div>`:'<p class="text-sm text-neutral-400">None yet.</p>'}
+  </div>`).join('')}</div>`;
+}
+function createForm(){
+  return `<h2 class="text-2xl font-bold mb-5">Create Campaign</h2>
+  <div id="cfMsg"></div>
+  <form id="campForm" class="card p-6 grid sm:grid-cols-2 gap-4" onsubmit="submitCampaign(event)">
+    <div><label class="text-xs font-medium text-neutral-500 block mb-1">Product name *</label><input class="inp" name="name" required></div>
+    <div><label class="text-xs font-medium text-neutral-500 block mb-1">Category *</label><select class="inp" name="category" required><option value="">Select category</option><option>Lifestyle</option><option>Electronics</option><option>Accessories</option></select></div>
+    <div class="sm:col-span-2"><label class="text-xs font-medium text-neutral-500 block mb-1">Product description *</label><textarea class="inp" name="description" rows="3" required></textarea></div>
+    <div><label class="text-xs font-medium text-neutral-500 block mb-1">Pre-order price (₹) *</label><input class="inp" type="number" name="price" required></div>
+    <div><label class="text-xs font-medium text-neutral-500 block mb-1">Funding target (₹) *</label><input class="inp" type="number" name="target" required></div>
+    <div><label class="text-xs font-medium text-neutral-500 block mb-1">Estimated production quantity</label><input class="inp" type="number" name="qty"></div>
+    <div><label class="text-xs font-medium text-neutral-500 block mb-1">Estimated delivery date</label><input class="inp" type="date" name="delivery"></div>
+    <div><label class="text-xs font-medium text-neutral-500 block mb-1">Campaign deadline *</label><input class="inp" type="date" name="deadline" required></div>
+    <div><label class="text-xs font-medium text-neutral-500 block mb-1">Creator name *</label><input class="inp" name="creator" required></div>
+    <div class="sm:col-span-2"><label class="text-xs font-medium text-neutral-500 block mb-1">Manufacturing requirements</label><textarea class="inp" name="mfg" rows="2"></textarea></div>
+    <div class="sm:col-span-2">
+      <label class="text-xs font-medium text-neutral-500 block mb-1">Product image</label>
+      <input type="file" accept="image/*" class="inp" onchange="handleImage(event)">
+      <img id="imgPreview" class="hidden mt-2 h-32 rounded-lg object-cover">
+    </div>
+    <button class="btn-y sm:col-span-2">Publish Campaign</button>
+  </form>`;
+}
+let pendingImg=null;
+function handleImage(e){
+  const f=e.target.files[0]; if(!f)return;
+  if(!f.type.startsWith('image/')){document.getElementById('cfMsg').innerHTML='<p class="text-red-600 text-sm mb-3">Please select a valid image file.</p>';return;}
+  const img=new Image(); const reader=new FileReader();
+  reader.onload=ev=>{ img.onload=()=>{
+    const canvas=document.createElement('canvas'); const w=Math.min(600,img.width); const scale=w/img.width;
+    canvas.width=w; canvas.height=img.height*scale;
+    canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+    pendingImg=canvas.toDataURL('image/jpeg',0.75);
+    const p=document.getElementById('imgPreview'); p.src=pendingImg; p.classList.remove('hidden');
+  }; img.src=ev.target.result; };
+  reader.readAsDataURL(f);
+}
+function submitCampaign(e){
+  e.preventDefault(); const f=new FormData(e.target);
+  const name=f.get('name').trim(), category=f.get('category'), creator=f.get('creator').trim();
+  const price=parseFloat(f.get('price')), target=parseFloat(f.get('target'));
+  const deadline=f.get('deadline');
+  if(!name||!category||!creator||!price||price<=0||!target||target<=0||!deadline){
+    document.getElementById('cfMsg').innerHTML='<p class="text-red-600 text-sm mb-3">Please fill all required fields (*) with valid values.</p>';return;
+  }
+  const c={id:uid(),name,category,description:f.get('description')||'',icon:category==='Lifestyle'?'box':category==='Electronics'?'leaf':'laptop',
+    imageData:pendingImg,price,target,contributionsRaised:0,preorderRaised:0,contributorsCount:0,preorderCount:0,preorderQty:0,
+    deadline:new Date(deadline).getTime(),deliveryDate:f.get('delivery')?new Date(f.get('delivery')).getTime():Date.now()+60*86400000,
+    creator,manufacturingReq:f.get('mfg')||'Not specified',productionQty:parseInt(f.get('qty'))||0,quotations:[],mfgActivity:[],influencerActivity:[],createdAt:Date.now()};
+  c.name=safeText(c.name); c.description=safeText(c.description); c.creator=safeText(c.creator); c.manufacturingReq=safeText(c.manufacturingReq);
+  DATA.campaigns.unshift(c); save(DATA); pendingImg=null;
+  renderLandingGrid(); renderExplore(); dashTab='overview'; renderDashboard();
+  document.getElementById('dashContent').insertAdjacentHTML('afterbegin',`<p class="card p-3 mb-4 text-green-700">“${safeText(name)}” is published and visible in Explore.</p>`);
+}
+function getPartnerProfile(role){try{return JSON.parse(localStorage.getItem('ventoraPartner_'+role)||'{}')}catch{return {}}}
+const PARTNER_FIELDS={manufacturer:[['company','Company / workshop name','text'],['username','Username','text'],['email','Contact email','email'],['location','Workshop location','text'],['specialty','What you make / capacity','text']],influencer:[['name','Name','text'],['username','Username','text'],['platform','Platform','text'],['handle','Profile link or handle','text'],['followers','Audience size','number'],['email','Contact email','email']]};
+function partnerProfileForm(role){const profile=getPartnerProfile(role);return `<form class="card p-5 mb-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-3" onsubmit="savePartnerProfile(event,'${role}')"><div class="sm:col-span-2 lg:col-span-3"><h3 class="text-lg font-bold">Your ${role==='manufacturer'?'maker':'creator'} profile</h3><p class="text-sm text-neutral-500">This information is shared with inventors when you respond to a campaign.</p></div>${PARTNER_FIELDS[role].map(([key,label,type])=>`<label class="text-xs text-neutral-600">${label}<input class="inp mt-1" name="${key}" type="${type}" value="${displayText(profile[key]||'')}" ${['username','email',role==='manufacturer'?'company':'name'].includes(key)?'required':''}></label>`).join('')}<button class="btn-y sm:col-span-2 lg:col-span-3">Save profile</button><p id="partnerSaved" class="text-sm text-green-700"></p></form>`;}
+function savePartnerProfile(e,role){e.preventDefault();const f=new FormData(e.target),profile={};PARTNER_FIELDS[role].forEach(([key])=>profile[key]=String(f.get(key)||'').trim());if(!profile.username||!profile.email||(role==='manufacturer'?!profile.company:!profile.name)){document.getElementById('partnerSaved').textContent='Add your name, username and contact email first.';return;}localStorage.setItem('ventoraPartner_'+role,JSON.stringify(profile));renderDashboard();const msg=document.getElementById('partnerSaved');if(msg)msg.textContent='Profile saved. Inventors will see these details with your responses.';}
+function manufacturerView(){
+  const profile=getPartnerProfile('manufacturer');
+  return `<h2 class="text-3xl font-bold mb-5">Manufacturing Opportunities</h2>${partnerProfileForm('manufacturer')}<div class="space-y-5">${DATA.campaigns.map(c=>`
+  <div class="card p-5">
+    <div class="flex justify-between flex-wrap gap-2 mb-1"><p class="font-bold">${c.name}</p><span class="text-xs">${status(c)}</span></div>
+    <p class="text-sm text-neutral-500 mb-2">${c.description}</p>
+    <p class="text-sm mb-1"><b>Requirement:</b> ${c.manufacturingReq}</p>
+    <p class="text-sm mb-3"><b>Est. quantity:</b> ${c.productionQty||'TBD'} units · <b>Demand raised:</b> ${fmt(raised(c))}</p>
+    <button class="btn-outline text-sm mr-2" onclick="mfgInterest('${c.id}')">Express Interest</button>
+    <button class="btn-dark text-sm" onclick="toggleQuote('${c.id}')">Submit Quotation</button>
+    <div id="qf-${c.id}" class="hidden mt-3 grid sm:grid-cols-2 gap-3">
+      <div><label class="text-xs font-medium text-neutral-500 block mb-1">Company name</label><input class="inp" id="mn-${c.id}" value="${displayText(profile.company||'')}"></div>
+      <div><label class="text-xs font-medium text-neutral-500 block mb-1">Proposed quantity</label><input class="inp" id="mq-${c.id}" type="number"></div>
+      <div><label class="text-xs font-medium text-neutral-500 block mb-1">Estimated unit price (₹)</label><input class="inp" id="mu-${c.id}" type="number"></div>
+      <div><label class="text-xs font-medium text-neutral-500 block mb-1">Setup / tooling charge (₹)</label><input class="inp" id="ms-${c.id}" type="number"></div>
+      <div><label class="text-xs font-medium text-neutral-500 block mb-1">Estimated production time</label><input class="inp" id="mt-${c.id}"></div>
+      <div><label class="text-xs font-medium text-neutral-500 block mb-1">Remarks</label><input class="inp" id="mr-${c.id}"></div>
+      <button class="btn-y sm:col-span-2 text-sm" onclick="submitQuote('${c.id}')">Submit</button>
+    </div>
+    <p id="mmsg-${c.id}" class="text-sm mt-2"></p>
+  </div>`).join('')}</div>`;
+}
+function mfgInterest(id){const c=find(id),p=getPartnerProfile('manufacturer');if(!p.company||!p.username||!p.email){document.getElementById('mmsg-'+id).innerHTML='<span class="text-red-600">Save your company name, username and email in your profile first.</span>';return;}c.mfgActivity.push({type:'interest',name:safeText(p.company),company:safeText(p.company),username:safeText(p.username),email:safeText(p.email),location:safeText(p.location),specialty:safeText(p.specialty),date:Date.now()});save(DATA);document.getElementById('mmsg-'+id).innerHTML='<span class="text-green-700">Interest recorded. Your profile is now visible to the inventor.</span>';}
+function toggleQuote(id){document.getElementById('qf-'+id).classList.toggle('hidden');}
+function submitQuote(id){
+  const c=find(id),profile=getPartnerProfile('manufacturer'); const name=document.getElementById('mn-'+id).value.trim()||profile.company||'';
+  const qty=document.getElementById('mq-'+id).value, unit=document.getElementById('mu-'+id).value, setup=document.getElementById('ms-'+id).value, time=document.getElementById('mt-'+id).value, rem=document.getElementById('mr-'+id).value;
+  if(!profile.company||!profile.username||!profile.email){document.getElementById('mmsg-'+id).innerHTML='<span class="text-red-600">Save your company profile, username and email first.</span>';return;}
+  if(!qty||!unit){document.getElementById('mmsg-'+id).innerHTML='<span class="text-red-600">Enter at least proposed quantity and unit price.</span>';return;}
+  c.mfgActivity.push({type:'quote',name:safeText(name),company:safeText(name),username:safeText(profile.username),email:safeText(profile.email),location:safeText(profile.location),specialty:safeText(profile.specialty),qty:safeText(qty),unit:safeText(unit),setup:safeText(setup||0),time:safeText(time||'Not specified'),remarks:safeText(rem),date:Date.now()}); save(DATA);
+  document.getElementById('mmsg-'+id).innerHTML='<span class="text-green-700">Quotation submitted — visible to the inventor.</span>'; toggleQuote(id);
+}
+function influencerView(){
+  return `<h2 class="text-3xl font-bold mb-5">Campaigns to Promote</h2>${partnerProfileForm('influencer')}<div class="space-y-5">${DATA.campaigns.map(c=>`
+  <div class="card p-5">
+    <div class="flex justify-between flex-wrap gap-2 mb-1"><p class="font-bold">${c.name}</p><span class="text-xs">${status(c)}</span></div>
+    <p class="text-sm text-neutral-500 mb-2">${c.description}</p>
+    <p class="text-sm mb-1"><b>Sponsorship fee:</b> ${fmt(Math.round(c.target*0.04))} flat</p>
+    <p class="text-sm mb-3"><b>Affiliate commission:</b> 8% of each sale you drive</p>
+    <button class="btn-dark text-sm" onclick="inflInterest('${c.id}')">Simulate Promotion Interest</button>
+    <p id="imsg-${c.id}" class="text-sm mt-2"></p>
+  </div>`).join('')}</div>`;
+}
+function inflInterest(id){const c=find(id),p=getPartnerProfile('influencer');if(!p.name||!p.username||!p.email){document.getElementById('imsg-'+id).innerHTML='<span class="text-red-600">Save your name, username and contact email in your profile first.</span>';return;}c.influencerActivity.push({...p,date:Date.now()});save(DATA);document.getElementById('imsg-'+id).innerHTML='<span class="text-green-700">Interest recorded. Your profile is now visible to the inventor.</span>';}
+
+
+
+/* ---------- INIT ---------- */
+setRole('customer');
+renderExplore();
+renderLandingGrid();
+showView('landing');
+</script>
+</body>
+</html>
